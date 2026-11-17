@@ -18,7 +18,7 @@ function App() {
   return (
     <main className="App">
       <section className="calculator" aria-label="Calculator">
-        <output className="display" aria-live="polite" aria-atomic="true">
+        <output className="display" aria-label="Calculator display" aria-live="polite" aria-atomic="true">
           {display}
         </output>
         <div className="buttons">
