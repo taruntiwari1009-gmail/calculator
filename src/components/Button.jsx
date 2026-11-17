@@ -155,14 +155,14 @@ const Button = ({
     }
 
     if (text === "=") {
-      if (!expression.trim() || OPERATORS.includes(expression.trim().split(/\s+/).at(-1))) return;
+      if (!expression.trim() || OPERATORS.includes(expression.trim().split(/\s+/).slice(-1)[0])) return;
       try {
         const result = evaluateExpression(expression);
         const resultText = String(result);
         setEquation(resultText);
         setDisplay(resultText);
         setJustEvaluated(true);
-      } catch (error) {
+      } catch {
         setEquation("");
         setDisplay("Error");
         setJustEvaluated(true);
