@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import App from "./App";
 
 const press = (name) => fireEvent.click(screen.getByRole("button", { name }));
+const display = () => screen.getByLabelText("Calculator display");
 
 beforeEach(() => {
   render(<App />);
@@ -12,7 +13,7 @@ test("evaluates a basic addition expression", () => {
   press("+");
   press("2");
   press("=");
-  expect(screen.getByText("3")).toBeInTheDocument();
+  expect(display()).toHaveTextContent("3");
 });
 
 test("respects multiplication precedence", () => {
@@ -22,7 +23,7 @@ test("respects multiplication precedence", () => {
   press("Multiply");
   press("4");
   press("=");
-  expect(screen.getByText("14")).toBeInTheDocument();
+  expect(display()).toHaveTextContent("14");
 });
 
 test("shows an error for division by zero", () => {
@@ -30,7 +31,7 @@ test("shows an error for division by zero", () => {
   press("Divide");
   press("0");
   press("=");
-  expect(screen.getByText("Error")).toBeInTheDocument();
+  expect(display()).toHaveTextContent("Error");
 });
 
 test("clears the current expression", () => {
@@ -38,5 +39,5 @@ test("clears the current expression", () => {
   press("+");
   press("2");
   press("AC");
-  expect(screen.getByText("0")).toBeInTheDocument();
+  expect(display()).toHaveTextContent("0");
 });
